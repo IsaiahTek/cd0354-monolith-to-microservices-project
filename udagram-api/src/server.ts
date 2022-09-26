@@ -1,5 +1,6 @@
 import cors from 'cors';
 import express from 'express';
+import {Response, Request} from "express"
 import {sequelize} from './sequelize';
 
 import {IndexRouter} from './controllers/v0/index.router';
@@ -17,7 +18,7 @@ import {V0_FEED_MODELS, V0_USER_MODELS} from './controllers/v0/model.index';
   await sequelize.sync();
 
   const app = express();
-  const port = process.env.PORT || 8080;
+  const port = process.env.PORT || 8090;
 
   app.use(bodyParser.json());
 
@@ -38,7 +39,7 @@ import {V0_FEED_MODELS, V0_USER_MODELS} from './controllers/v0/model.index';
   app.use('/api/v0/', IndexRouter);
 
   // Root URI call
-  app.get( '/', async ( req, res ) => {
+  app.get( '/', async ( req:Request, res:Response ) => {
     res.send( '/api/v0/' );
   } );
 
